@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Datos originales pesados: no se suben a GitHub.
+data/raw/*.csv
+data/raw/*.zip
+
+# Archivos temporales de Python/Jupyter.
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Salidas pesadas o modelos, por si se generan en el futuro.
+*.pkl
+*.joblib
+*.parquet

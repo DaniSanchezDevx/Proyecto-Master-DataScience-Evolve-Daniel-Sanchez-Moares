@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Informe final - Steam Games 2025</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #202124; max-width: 980px; margin: 0 auto; padding: 32px 24px 56px; background: #fff; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { border-bottom: 3px solid #2563eb; padding-bottom: 12px; margin-bottom: 28px; }
+    h2 { margin-top: 36px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+    h3 { margin-top: 26px; }
+    code { background: #f3f4f6; padding: 2px 5px; border-radius: 4px; font-size: .95em; }
+    blockquote { border-left: 4px solid #2563eb; margin: 16px 0; padding: 8px 16px; background: #eff6ff; color: #1e3a8a; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0 24px; font-size: .95rem; }
+    th, td { border: 1px solid #d1d5db; padding: 8px 10px; text-align: left; }
+    th { background: #f3f4f6; }
+    img { display: block; max-width: 100%; margin: 24px auto 32px; border: 1px solid #e5e7eb; border-radius: 6px; }
+    @media print { body { max-width: none; padding: 18mm; } h2 { page-break-after: avoid; } img, table { page-break-inside: avoid; } }
+  </style>
+</head>
+<body>
+<h1>Informe final: Steam Games 2025</h1>
+<h2>1. Introducción</h2>
+<p>Este proyecto analiza un dataset de videojuegos de Steam de marzo de 2025. El objetivo principal es explorar qué características se relacionan con la popularidad, el tiempo de juego y la valoración de los videojuegos.</p>
+<p>El análisis se ha dividido en tres bloques:</p>
+<ol>
+<li>Análisis por géneros.</li>
+<li>Comparación entre juegos gratuitos y juegos de pago.</li>
+<li>Relación entre valoraciones positivas, usuarios estimados y tiempo medio de juego.</li>
+</ol>
+<h2>2. Objetivos</h2>
+<p>Las preguntas principales del proyecto son:</p>
+<ul>
+<li>¿Qué géneros tienen más usuarios estimados medios por juego?</li>
+<li>¿Qué géneros tienen mayor tiempo medio de juego?</li>
+<li>¿Existen diferencias entre juegos gratuitos y juegos de pago?</li>
+<li>¿Existe relación entre las valoraciones positivas, los usuarios estimados y el tiempo medio de juego?</li>
+</ul>
+<h2>3. Dataset</h2>
+<p>El archivo original utilizado es:</p>
+<p><code>data/raw/games_march2025_full.csv</code></p>
+<p>El dataset contiene información sobre juegos de Steam, incluyendo:</p>
+<ul>
+<li>nombre del juego;</li>
+<li>fecha de lanzamiento;</li>
+<li>géneros;</li>
+<li>precio;</li>
+<li>usuarios estimados;</li>
+<li>tiempo medio de juego;</li>
+<li>valoraciones positivas y negativas;</li>
+<li>plataformas disponibles;</li>
+<li>desarrolladores y publicadores.</li>
+</ul>
+<h2>4. Limpieza y transformación de datos</h2>
+<p>El archivo original contiene columnas que necesitan transformación antes de poder analizarlas correctamente.</p>
+<p>Las principales transformaciones realizadas han sido:</p>
+<ul>
+<li>Conversión de <code>genres</code> de texto a listas reales de géneros.</li>
+<li>Traducción de géneros principales al castellano.</li>
+<li>Conversión de <code>estimated_owners</code> de rango a valor numérico aproximado usando el punto medio.</li>
+<li>Conversión del tiempo medio de juego de minutos a horas.</li>
+<li>Creación de <code>total_resenas</code>, sumando reseñas positivas y negativas.</li>
+<li>Creación de <code>proporcion_positivas</code>, dividiendo reseñas positivas entre total de reseñas.</li>
+<li>Creación de <code>es_gratis</code>, para separar juegos gratuitos y juegos de pago.</li>
+<li>Agrupación por género para obtener métricas resumidas.</li>
+</ul>
+<p>Los archivos procesados principales son:</p>
+<ul>
+<li><code>data/processed/juegos_steam_limpio_base.csv</code></li>
+<li><code>data/processed/resumen_generos.csv</code></li>
+<li><code>data/processed/resumen_generos_min_1000_juegos.csv</code></li>
+</ul>
+<h2>5. Análisis por géneros</h2>
+<p>Notebook relacionado:</p>
+<p><code>notebooks/01_analisis_generos.ipynb</code></p>
+<h3>5.1 Usuarios estimados medios por juego</h3>
+<p>Para analizar qué géneros tienen más usuarios, se ha utilizado <code>usuarios_estimados_media</code>, no <code>usuarios_estimados_total</code>.</p>
+<p>Esto es importante porque <code>usuarios_estimados_total</code> suma todos los juegos de un género y puede generar cifras muy infladas. En cambio, <code>usuarios_estimados_media</code> responde mejor a la pregunta:</p>
+<blockquote>
+<p>¿Cuántos usuarios estimados tiene de media un juego de este género?</p>
+</blockquote>
+<p>Filtrando géneros con al menos 1000 juegos, los géneros con más usuarios estimados medios por juego son:</p>
+<table>
+<thead>
+<tr>
+  <th>Género</th>
+  <th style="text-align:right">Usuarios estimados medios por juego</th>
+  <th style="text-align:right">Cantidad de juegos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Multijugador masivo</td>
+  <td style="text-align:right">486.198</td>
+  <td style="text-align:right">2.129</td>
+</tr>
+<tr>
+  <td>Gratis</td>
+  <td style="text-align:right">233.896</td>
+  <td style="text-align:right">8.873</td>
+</tr>
+<tr>
+  <td>Acción</td>
+  <td style="text-align:right">157.349</td>
+  <td style="text-align:right">36.894</td>
+</tr>
+<tr>
+  <td>RPG</td>
+  <td style="text-align:right">150.048</td>
+  <td style="text-align:right">16.350</td>
+</tr>
+<tr>
+  <td>Estrategia</td>
+  <td style="text-align:right">114.714</td>
+  <td style="text-align:right">17.380</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/01_usuarios_por_genero.png" alt="Top 10 géneros por usuarios estimados medios por juego" /></p>
+<h3>5.2 Tiempo medio de juego por género</h3>
+<p>El dataset contiene muchos juegos con tiempo medio igual a 0. Por eso, para analizar el tiempo de juego se ha usado principalmente la columna:</p>
+<p><code>tiempo_medio_horas_solo_con_tiempo</code></p>
+<p>Esta columna calcula la media solo sobre juegos con tiempo registrado mayor que 0.</p>
+<p>Los géneros con mayor tiempo medio de juego son:</p>
+<table>
+<thead>
+<tr>
+  <th>Género</th>
+  <th style="text-align:right">Tiempo medio en horas</th>
+  <th style="text-align:right">Juegos con tiempo registrado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Simulación</td>
+  <td style="text-align:right">37,47</td>
+  <td style="text-align:right">1.929</td>
+</tr>
+<tr>
+  <td>Multijugador masivo</td>
+  <td style="text-align:right">32,42</td>
+  <td style="text-align:right">303</td>
+</tr>
+<tr>
+  <td>Casual</td>
+  <td style="text-align:right">28,32</td>
+  <td style="text-align:right">2.498</td>
+</tr>
+<tr>
+  <td>Aventura</td>
+  <td style="text-align:right">23,99</td>
+  <td style="text-align:right">3.381</td>
+</tr>
+<tr>
+  <td>Acción</td>
+  <td style="text-align:right">18,92</td>
+  <td style="text-align:right">3.647</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/02_tiempo_por_genero.png" alt="Top 10 géneros por tiempo medio de juego" /></p>
+<h3>5.3 Interpretación</h3>
+<p>Los géneros con más usuarios medios por juego no son necesariamente los géneros con mayor tiempo medio.</p>
+<p>Multijugador masivo destaca por usuarios medios por juego, mientras que Simulación destaca por tiempo medio acumulado. Esto sugiere que popularidad y tiempo de juego no miden exactamente lo mismo.</p>
+<h2>6. Juegos gratuitos vs juegos de pago</h2>
+<p>Notebook relacionado:</p>
+<p><code>notebooks/02_gratis_vs_pago.ipynb</code></p>
+<p>En este bloque se comparan juegos gratuitos y juegos de pago en usuarios estimados, tiempo de juego y valoraciones.</p>
+<table>
+<thead>
+<tr>
+  <th>Tipo de juego</th>
+  <th style="text-align:right">Cantidad de juegos</th>
+  <th style="text-align:right">Usuarios estimados medios</th>
+  <th style="text-align:right">Tiempo medio en horas</th>
+  <th style="text-align:right">Valoraciones positivas medias</th>
+  <th style="text-align:right">Precio medio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Gratis</td>
+  <td style="text-align:right">19.420</td>
+  <td style="text-align:right">134.488</td>
+  <td style="text-align:right">14,37</td>
+  <td style="text-align:right">75%</td>
+  <td style="text-align:right">0,00</td>
+</tr>
+<tr>
+  <td>Pago</td>
+  <td style="text-align:right">75.528</td>
+  <td style="text-align:right">85.688</td>
+  <td style="text-align:right">22,49</td>
+  <td style="text-align:right">75%</td>
+  <td style="text-align:right">8,69</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/03_gratis_vs_pago_usuarios.png" alt="Usuarios estimados medios: gratis vs pago" /></p>
+<p><img src="figures/04_gratis_vs_pago_tiempo.png" alt="Tiempo medio: gratis vs pago" /></p>
+<h3>Interpretación</h3>
+<p>Los juegos gratuitos tienen más usuarios estimados de media por juego. Esto puede explicarse porque no tienen barrera de entrada económica.</p>
+<p>Sin embargo, los juegos de pago presentan mayor tiempo medio de juego entre los juegos con tiempo registrado. Esto puede indicar que los usuarios que pagan por un juego tienden a dedicarle más tiempo, aunque sería necesario un análisis más profundo para confirmarlo.</p>
+<p>Las valoraciones positivas medias son muy similares entre ambos grupos.</p>
+<h2>7. Valoraciones, usuarios y tiempo de juego</h2>
+<p>Notebook relacionado:</p>
+<p><code>notebooks/03_valoraciones_popularidad.ipynb</code></p>
+<p>En este bloque se analiza si existe relación entre:</p>
+<ul>
+<li>usuarios estimados;</li>
+<li>tiempo medio de juego;</li>
+<li>proporción de valoraciones positivas;</li>
+<li>total de reseñas.</li>
+</ul>
+<p>Para evitar resultados poco fiables, se filtran juegos con al menos 50 reseñas.</p>
+<h3>7.1 Correlaciones principales</h3>
+<table>
+<thead>
+<tr>
+  <th>Variables</th>
+  <th style="text-align:right">Correlación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Usuarios estimados vs valoraciones positivas</td>
+  <td style="text-align:right">0,029</td>
+</tr>
+<tr>
+  <td>Tiempo medio vs valoraciones positivas</td>
+  <td style="text-align:right">0,005</td>
+</tr>
+<tr>
+  <td>Usuarios estimados vs total de reseñas</td>
+  <td style="text-align:right">0,700</td>
+</tr>
+</tbody>
+</table>
+<p><img src="figures/05_valoraciones_vs_usuarios.png" alt="Usuarios estimados medios según valoración del juego" /></p>
+<p><img src="figures/06_valoraciones_vs_tiempo.png" alt="Tiempo medio de juego según valoración del juego" /></p>
+<h3>Interpretación</h3>
+<p>Las valoraciones positivas apenas tienen relación lineal con los usuarios estimados o el tiempo medio de juego.</p>
+<p>En cambio, usuarios estimados y total de reseñas sí tienen una relación clara. Esto es esperable: los juegos con más usuarios tienden a acumular más reseñas.</p>
+<p>Para que la relación sea más fácil de interpretar, los gráficos dividen los juegos en tres grupos: valoración baja, media y alta. Después comparan cuántos usuarios estimados y cuántas horas medias tiene cada grupo.</p>
+<p>Una conclusión importante es que popularidad, tiempo de juego y satisfacción son dimensiones distintas. Un juego puede tener muchos usuarios sin tener necesariamente mejores valoraciones.</p>
+<h2>8. Limitaciones del análisis</h2>
+<p>Este proyecto tiene varias limitaciones importantes:</p>
+<ul>
+<li><code>estimated_owners</code> no es una cifra exacta, sino un rango.</li>
+<li>Se usa el punto medio del rango como aproximación.</li>
+<li><code>usuarios_estimados_total</code> no representa usuarios únicos.</li>
+<li>Un mismo usuario puede jugar a varios juegos.</li>
+<li>Un mismo juego puede pertenecer a varios géneros.</li>
+<li>Muchos juegos tienen tiempo medio igual a 0.</li>
+<li>Las valoraciones pueden ser poco fiables en juegos con pocas reseñas.</li>
+<li>Correlación no implica causalidad.</li>
+</ul>
+<p>Estas limitaciones no invalidan el análisis, pero deben tenerse en cuenta al interpretar los resultados.</p>
+<h2>9. Conclusiones generales</h2>
+<p>Las principales conclusiones del proyecto son:</p>
+<ul>
+<li>Multijugador masivo es el género con más usuarios estimados medios por juego entre los géneros con al menos 1000 juegos.</li>
+<li>Simulación es el género con mayor tiempo medio de juego entre los géneros principales.</li>
+<li>Los juegos gratuitos tienen más usuarios estimados medios que los juegos de pago.</li>
+<li>Los juegos de pago tienen mayor tiempo medio de juego entre los juegos con tiempo registrado.</li>
+<li>Las valoraciones positivas no muestran una relación fuerte con usuarios estimados ni con tiempo medio.</li>
+<li>Los usuarios estimados y el total de reseñas sí están claramente relacionados.</li>
+</ul>
+<p>En conjunto, el análisis muestra que no existe una única forma de medir el éxito de un videojuego. Un género o juego puede destacar por usuarios, por tiempo de juego o por valoraciones, y estas dimensiones no siempre coinciden.</p>
+<h2>10. Próximos pasos</h2>
+<p>Posibles ampliaciones del proyecto:</p>
+<ul>
+<li>Analizar la evolución por año de lanzamiento.</li>
+<li>Comparar géneros dentro de juegos gratuitos y de pago.</li>
+<li>Crear un modelo predictivo sencillo para estimar si un juego tendrá alta valoración.</li>
+<li>Analizar etiquetas (<code>tags</code>) además de géneros.</li>
+<li>Estudiar diferencias entre plataformas: Windows, Mac y Linux.</li>
+</ul>
+
+</body>
+</html>
