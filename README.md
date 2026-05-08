@@ -1,6 +1,6 @@
 # Proyecto Steam Games 2025
 
-Este proyecto es un análisis de datos sobre videojuegos publicados en Steam. Lo he desarrollado como proyecto académico del **Master en Data Science de Evolve**.
+Este proyecto es un análisis de datos sobre videojuegos publicados en Steam. Lo he desarrollado como proyecto académico del **Master en Data Science & IA de Evolve**.
 
 La idea principal era trabajar con un dataset real, limpiarlo, transformarlo y sacar conclusiones comprensibles a partir de los datos. Elegí este dataset porque Steam es una plataforma muy conocida y porque los videojuegos me parecían un tema interesante para practicar análisis exploratorio.
 
@@ -63,12 +63,7 @@ Steam_Games_2025/
 |   |-- entrega/
 |   |-- informe_final.md
 |   |-- informe_final.html
-|   |-- presentacion_resumen.md
-|   |-- publicacion_devto.md
-|   |-- medium_hashnode.md
-|   |-- linkedin_article.md
-|   |-- linkedin_post.md
-|   `-- checklist_publicacion_evolve.md
+|   `-- presentacion_resumen.md
 |-- scripts/
 |   `-- run_all.ps1
 |-- src/
@@ -199,6 +194,12 @@ Este proyecto tiene algunas limitaciones importantes:
 
 Estas limitaciones no invalidan el análisis, pero sí ayudan a interpretar los resultados con cuidado.
 
+## Uso de IA como apoyo
+
+Durante el desarrollo del proyecto he utilizado IA como herramienta de apoyo, concretamente ChatGPT/Codex, para orientarme en la estructura del proyecto, revisar código, comentar scripts, mejorar explicaciones y detectar posibles errores de interpretación.
+
+Las decisiones del análisis, la revisión de resultados y la interpretación final se han trabajado de forma supervisada. La IA ha sido una ayuda para avanzar y aprender, no un sustituto del razonamiento necesario para entender los datos.
+
 ## Qué he aprendido
 
 Con este proyecto he practicado todo el flujo básico de un análisis de datos:
@@ -223,21 +224,12 @@ El proyecto incluye:
 - CSV procesados;
 - informe final en Markdown;
 - informe final en HTML;
-- PDF final;
-- borradores para publicación en Dev.to, Medium/Hashnode y LinkedIn.
+- PDF final.
 
-## Publicación
-
-Repositorio:
+## Repositorio
 
 ```text
 https://github.com/DaniSanchezDevx/Proyecto-Master-DataScience-Evolve-Daniel-Sanchez-Moares
 ```
 
-Nombre del repositorio según la guía de publicación:
-
-```text
-Proyecto-Master-DataScience-Evolve-Daniel-Sanchez-Moares
-```
-
-Proyecto académico desarrollado durante el **Master en Data Science de Evolve**.
+Proyecto académico desarrollado durante el **Master en Data Science & IA de Evolve**.
