@@ -1,3 +1,15 @@
+"""Limpieza y transformación principal del dataset de Steam.
+
+Este archivo es el primer paso del proyecto:
+
+1. lee el CSV original de Kaggle;
+2. selecciona las columnas necesarias;
+3. crea variables más fáciles de analizar;
+4. genera los CSV limpios que usan los notebooks y las figuras.
+
+No se modifican los datos originales de `data/raw/`.
+"""
+
 # Permite usar anotaciones de tipos modernas sin problemas de compatibilidad.
 # En este script se usa, por ejemplo, en funciones que devuelven list[str] o float | None.
 from __future__ import annotations
