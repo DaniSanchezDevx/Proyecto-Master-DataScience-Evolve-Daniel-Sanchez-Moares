@@ -19,8 +19,8 @@ Algunas conclusiones:
 
 Proyecto académico desarrollado durante el Master en Data Science de Evolve.
 
-Artículo: `AÑADIR_ENLACE_ARTICULO`
+Repositorio: https://github.com/DaniSanchezDevx/Proyecto-Master-DataScience-Evolve-Daniel-Sanchez-Moares
 
-Repositorio: `AÑADIR_ENLACE_REPOSITORIO`
+Artículo de Dev.to: pendiente de publicar.
 
 #DataScience #Python #Pandas #Jupyter #Evolve
